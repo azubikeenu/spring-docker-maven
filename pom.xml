@@ -52,12 +52,13 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <!--<dockerHost>http://127.0.0.1:2375</dockerHost>-->
-                <!-- for linux based environment-->
-                <!-- <dockerHost>unix:///var/run/docker.sock</dockerHost>-->
                 <version>0.40.1</version>
                 <configuration>
                     <verbose>true</verbose>
+                    <!--<dockerHost>tcp://localhost:2375</dockerHost>-->
+                    <!-- for linux based environment-->
+                    <!-- <dockerHost>unix:///var/run/docker.sock</dockerHost>-->
+                    <useColor>true</useColor>
                     <images>
                         <image>
                             <name>${docker.image.prefix}/${docker.image.name}</name>
@@ -73,6 +74,11 @@
                                     <tag>${project.version}</tag>
                                 </tags>
                             </build>
+                            <run>
+                                <ports>
+                                    <port>8080:8080</port>
+                                </ports>
+                            </run>
                         </image>
                     </images>
                 </configuration>
